@@ -1,0 +1,149 @@
+[gd_scene load_steps=15 format=4 uid="uid://bwak3b0pquan4"]
+
+[ext_resource type="PackedScene" uid="uid://3djkvn8gsn8d" path="res://scenes/hintergrund.tscn" id="1_abvr5"]
+[ext_resource type="TileSet" uid="uid://d2rvhvcwtaetl" path="res://scenes/tileset.tres" id="2_pos36"]
+[ext_resource type="PackedScene" uid="uid://se3yf2bpd7k7" path="res://scenes/spiele_manager.tscn" id="3_gougm"]
+[ext_resource type="PackedScene" uid="uid://dqnaqj8yb6hwd" path="res://scenes/spieler.tscn" id="4_c111n"]
+[ext_resource type="PackedScene" uid="uid://dtrbka1ef726o" path="res://scenes/killzone.tscn" id="5_yuj76"]
+[ext_resource type="PackedScene" uid="uid://oeleuyu0x67e" path="res://scenes/gegenstände/ziel.tscn" id="6_a0pxo"]
+[ext_resource type="PackedScene" uid="uid://2pfen36chcrh" path="res://scenes/gegenstände/flasche.tscn" id="7_xegos"]
+[ext_resource type="PackedScene" uid="uid://pqp5qaw561fr" path="res://scenes/gegenstände/münze.tscn" id="8_5v05l"]
+[ext_resource type="PackedScene" uid="uid://cyj0xgfob3ii4" path="res://scenes/gegenstände/giftmüll.tscn" id="9_b84yh"]
+[ext_resource type="PackedScene" uid="uid://despq3lmat6a4" path="res://scenes/gegenstände/feuer.tscn" id="10_4cqm3"]
+[ext_resource type="PackedScene" uid="uid://bgv5v2fxqlswe" path="res://scenes/gegenstände/plattform.tscn" id="11_anabf"]
+[ext_resource type="PackedScene" uid="uid://d2w2i5h0lhc6l" path="res://scenes/gegenstände/schleim.tscn" id="12_yvib8"]
+[ext_resource type="PackedScene" uid="uid://b8mu1iw4xrmj3" path="res://scenes/gegenstände/bewegte_plattform.tscn" id="13_nlkt8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cn5tm"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Hintergrund" parent="." instance=ExtResource("1_abvr5")]
+metadata/_edit_lock_ = true
+
+[node name="Szene" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAMAAAADAAgAAAAGAAIAAAADAAcAAAAGAAAAAAACAAQAAAADAAIAAAAJAAAAAAAEAAIAAAAKAAAAAAAFAAIAAAALAAAAAAD//wQAAAAAAAAAAAACAAMAAAADAAgAAAACAAIAAAADAAcAAAACAAAAAAACAAQAAAD+/wQAAAAAAAAAAAD9/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAD7/wQAAAAAAAAAAAD6/wQAAAAAAAAAAAD5/wQAAAAAAAAAAAD4/wQAAAAAAAAAAAD3/wQAAAAAAAAAAAD//wIAAAAJAAAAAAAAAAIAAAAKAAAAAAABAAIAAAALAAAAAAD+/wIAAAADAAcAAAD+/wMAAAADAAgAAAD+/wAAAAACAAQAAAD7/wIAAAAJAAAAAAD8/wIAAAAKAAAAAAD9/wIAAAALAAAAAAD6/wIAAAADAAcAAAD6/wMAAAADAAgAAAD6/wAAAAACAAQAAAD3/wEAAAAAAAMAAAD3/wIAAAAAAAQAAAD3/wMAAAAAAAUAAAD2/wQAAAAAAAAAAAD1/wQAAAAAAAAAAAD0/wQAAAAAAAAAAADz/wQAAAAAAAAAAADy/wQAAAAAAAAAAADx/wQAAAAAAAAAAADw/wQAAAAAAAAAAADv/wQAAAAAAAAAAADu/wQAAAAAAAAAAADt/wQAAAAAAAAAAADs/wQAAAAAAAAAAAD2/wIAAAAHAAQAAAD1/wEAAAAHAAQAAAD0/wEAAAAHAAQAAADz/wMAAAAHAAQAAADz/wEAAAAHAAQAAADx/wIAAAAHAAQAAADv/wAAAAAHAAQAAADu/wEAAAAHAAQAAADu/wMAAAAHAAQAAADq/wMAAAAEAAgAAADo/wIAAAAEAAgAAADp/wEAAAAEAAgAAADq/wAAAAAEAAgAAADt/wAAAAAEAAgAAAD4/wEAAAAEAAgAAAD2/wAAAAAEAAgAAAA=")
+tile_set = ExtResource("2_pos36")
+
+[node name="SpieleManager" parent="." instance=ExtResource("3_gougm")]
+unique_name_in_owner = true
+
+[node name="Spieler" parent="." instance=ExtResource("4_c111n")]
+position = Vector2(34, 37)
+
+[node name="Kamera" type="Camera2D" parent="Spieler"]
+position = Vector2(0, -7)
+zoom = Vector2(4, 4)
+limit_bottom = 120
+limit_smoothed = true
+position_smoothing_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Lavaboden" parent="." instance=ExtResource("5_yuj76")]
+position = Vector2(74, 141)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lavaboden"]
+shape = SubResource("WorldBoundaryShape2D_cn5tm")
+
+[node name="Münzen" type="Node" parent="."]
+
+[node name="Plattformen" type="Node" parent="."]
+
+[node name="Texte" type="Node" parent="."]
+
+[node name="Ziel" parent="." instance=ExtResource("6_a0pxo")]
+position = Vector2(-298, -6)
+
+[node name="Flasche" parent="." instance=ExtResource("7_xegos")]
+position = Vector2(-105, 57)
+
+[node name="Flasche2" parent="." instance=ExtResource("7_xegos")]
+position = Vector2(-66, 42)
+
+[node name="Flasche3" parent="." instance=ExtResource("7_xegos")]
+position = Vector2(24, 43)
+
+[node name="Flasche4" parent="." instance=ExtResource("7_xegos")]
+position = Vector2(-56, 26)
+
+[node name="Flasche5" parent="." instance=ExtResource("7_xegos")]
+position = Vector2(7, 29)
+
+[node name="Flasche6" parent="." instance=ExtResource("7_xegos")]
+position = Vector2(75, 26)
+
+[node name="Flasche7" parent="." instance=ExtResource("7_xegos")]
+position = Vector2(71, 43)
+
+[node name="Münze" parent="." instance=ExtResource("8_5v05l")]
+position = Vector2(-101, 30)
+
+[node name="Münze2" parent="." instance=ExtResource("8_5v05l")]
+position = Vector2(-212, 41)
+
+[node name="Münze3" parent="." instance=ExtResource("8_5v05l")]
+position = Vector2(43, 10)
+
+[node name="Münze4" parent="." instance=ExtResource("8_5v05l")]
+position = Vector2(-24, 8)
+
+[node name="Münze5" parent="." instance=ExtResource("8_5v05l")]
+position = Vector2(-138, 49)
+
+[node name="Giftmüll" parent="." instance=ExtResource("9_b84yh")]
+position = Vector2(-58, 9)
+
+[node name="Feuer" parent="." instance=ExtResource("10_4cqm3")]
+position = Vector2(-51, 59)
+
+[node name="Plattform" parent="." instance=ExtResource("11_anabf")]
+position = Vector2(-116, 41)
+
+[node name="Giftmüll2" parent="." instance=ExtResource("9_b84yh")]
+position = Vector2(71, 10)
+
+[node name="Plattform2" parent="." instance=ExtResource("11_anabf")]
+position = Vector2(-227, 12)
+
+[node name="Flasche8" parent="." instance=ExtResource("7_xegos")]
+position = Vector2(-183, 46)
+
+[node name="Schleim" parent="." instance=ExtResource("12_yvib8")]
+position = Vector2(-253, 48)
+
+[node name="Giftmüll3" parent="." instance=ExtResource("9_b84yh")]
+position = Vector2(-316, 34)
+
+[node name="Plattform3" parent="." instance=ExtResource("11_anabf")]
+position = Vector2(-289, 57)
+
+[node name="Schleim2" parent="." instance=ExtResource("12_yvib8")]
+position = Vector2(-150, 64)
+
+[node name="Münze6" parent="." instance=ExtResource("8_5v05l")]
+position = Vector2(-296, 40)
+
+[node name="Feuer2" parent="." instance=ExtResource("10_4cqm3")]
+position = Vector2(-319, 49)
+
+[node name="Giftmüll4" parent="." instance=ExtResource("9_b84yh")]
+position = Vector2(-166, 42)
+
+[node name="BewegtePlattform" parent="." instance=ExtResource("13_nlkt8")]
+position = Vector2(-294, 33)
+
+[node name="Zielposition" parent="BewegtePlattform" index="2"]
+position = Vector2(394, 0)
+
+[node name="Giftmüll5" parent="." instance=ExtResource("9_b84yh")]
+position = Vector2(-225, 23)
+
+[node name="Münze7" parent="." instance=ExtResource("8_5v05l")]
+position = Vector2(-230, 3)
+
+[node name="Flasche9" parent="." instance=ExtResource("7_xegos")]
+position = Vector2(-200, 8)
+
+[editable path="BewegtePlattform"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://csr725st2es03"]
+
+[ext_resource type="FontFile" uid="uid://dbjl1e6kdxpl6" path="res://assets/fonts/PixelOperator8.ttf" id="1_v3x81"]
+
+[node name="Text" type="Label"]
+theme_override_fonts/font = ExtResource("1_v3x81")
+theme_override_font_sizes/font_size = 8
+text = "Etwas Text..."

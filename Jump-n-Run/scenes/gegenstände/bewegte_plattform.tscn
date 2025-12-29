@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8mu1iw4xrmj3"]
+
+[ext_resource type="PackedScene" uid="uid://bgv5v2fxqlswe" path="res://scenes/gegenstände/plattform.tscn" id="1_q0tuk"]
+[ext_resource type="Script" uid="uid://c5rx8xqt4ectw" path="res://scripts/bewegte_plattform.gd" id="2_7dbdh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fc18"]
+size = Vector2(32, 8)
+
+[node name="BewegtePlattform" instance=ExtResource("1_q0tuk")]
+script = ExtResource("2_7dbdh")
+geschwindigkeit = 30.0
+wartezeit = 0
+
+[node name="Sprite2D" parent="." index="0"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_4fc18")
+metadata/_edit_lock_ = true
+
+[node name="Zielposition" type="Marker2D" parent="." index="2"]

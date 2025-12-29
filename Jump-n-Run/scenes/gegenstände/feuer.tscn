@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://despq3lmat6a4"]
+
+[ext_resource type="Texture2D" uid="uid://b02lurk2eh57" path="res://assets/sprites/campfire_16x16.png" id="1_cxrsi"]
+[ext_resource type="PackedScene" uid="uid://dtrbka1ef726o" path="res://scenes/killzone.tscn" id="2_7qm8r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qm8r"]
+atlas = ExtResource("1_cxrsi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_172yh"]
+atlas = ExtResource("1_cxrsi")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7krpy"]
+atlas = ExtResource("1_cxrsi")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gclyc"]
+atlas = ExtResource("1_cxrsi")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u6dm2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qm8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_172yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7krpy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gclyc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_172yh"]
+radius = 5.0
+height = 14.0
+
+[node name="Feuer" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_u6dm2")
+autoplay = "default"
+frame_progress = 0.7673882
+
+[node name="Killzone" parent="." instance=ExtResource("2_7qm8r")]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("CapsuleShape2D_172yh")
+metadata/_edit_lock_ = true

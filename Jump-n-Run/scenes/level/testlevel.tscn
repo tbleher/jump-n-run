@@ -1,0 +1,249 @@
+[gd_scene load_steps=21 format=4 uid="uid://cuv4vme4rwno0"]
+
+[ext_resource type="Script" uid="uid://dxuf40asaxghr" path="res://scripts/game_manager.gd" id="1_exuh1"]
+[ext_resource type="TileSet" uid="uid://d2rvhvcwtaetl" path="res://scenes/tileset.tres" id="1_inive"]
+[ext_resource type="PackedScene" uid="uid://3djkvn8gsn8d" path="res://scenes/hintergrund.tscn" id="1_rbvdy"]
+[ext_resource type="FontFile" uid="uid://c53kogtyjwsss" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_inive"]
+[ext_resource type="PackedScene" uid="uid://dqnaqj8yb6hwd" path="res://scenes/spieler.tscn" id="4_147mi"]
+[ext_resource type="PackedScene" uid="uid://dtrbka1ef726o" path="res://scenes/killzone.tscn" id="5_l8kbu"]
+[ext_resource type="PackedScene" uid="uid://despq3lmat6a4" path="res://scenes/gegenstände/feuer.tscn" id="6_147mi"]
+[ext_resource type="PackedScene" uid="uid://pqp5qaw561fr" path="res://scenes/gegenstände/münze.tscn" id="6_trto6"]
+[ext_resource type="PackedScene" uid="uid://bgv5v2fxqlswe" path="res://scenes/gegenstände/plattform.tscn" id="7_68cdg"]
+[ext_resource type="PackedScene" uid="uid://d2w2i5h0lhc6l" path="res://scenes/gegenstände/schleim.tscn" id="8_dlty2"]
+[ext_resource type="FontFile" uid="uid://dbjl1e6kdxpl6" path="res://assets/fonts/PixelOperator8.ttf" id="9_qgmpe"]
+[ext_resource type="PackedScene" uid="uid://b8mu1iw4xrmj3" path="res://scenes/gegenstände/bewegte_plattform.tscn" id="9_rbvdy"]
+[ext_resource type="PackedScene" uid="uid://oeleuyu0x67e" path="res://scenes/gegenstände/ziel.tscn" id="13_l8kbu"]
+[ext_resource type="PackedScene" uid="uid://cyj0xgfob3ii4" path="res://scenes/gegenstände/giftmüll.tscn" id="14_xgq10"]
+[ext_resource type="PackedScene" uid="uid://2pfen36chcrh" path="res://scenes/gegenstände/flasche.tscn" id="15_fbhlx"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cn5tm"]
+
+[sub_resource type="Animation" id="Animation_apgth"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(370, 52)]
+}
+
+[sub_resource type="Animation" id="Animation_bm7kf"]
+resource_name = "move"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(370, 52), Vector2(462, 52)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xuk5v"]
+_data = {
+&"RESET": SubResource("Animation_apgth"),
+&"move": SubResource("Animation_bm7kf")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbvdy"]
+size = Vector2(16, 8)
+
+[node name="Spiel" type="Node2D"]
+
+[node name="Hintergrund" parent="." instance=ExtResource("1_rbvdy")]
+metadata/_edit_lock_ = true
+
+[node name="Szene" type="TileMapLayer" parent="."]
+use_parent_material = true
+position = Vector2(-2, 0)
+tile_map_data = PackedByteArray("AAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAD//wUAAAAAAAAAAAAAAAUAAAAAAAAAAAADAAUAAAAGAAAAAAAEAAUAAAAHAAEAAAAFAAUAAAAGAAAAAAAJAAUAAAAGAAAAAAABAAQAAAAAAAEAAAABAAUAAAAAAAEAAAABAAYAAAAAAAEAAAAAAAYAAAAAAAEAAAD//wYAAAAAAAEAAAD//wcAAAAAAAEAAAAAAAcAAAABAAEAAAABAAcAAAAAAAEAAAACAAcAAAAAAAEAAAACAAYAAAABAAAAAAACAAUAAAAAAAEAAAACAAQAAAAAAAEAAAADAAYAAAAGAAEAAAADAAcAAAAGAAEAAAAEAAcAAAAGAAEAAAAEAAYAAAAIAAAAAAAFAAYAAAAGAAEAAAAFAAcAAAAGAAEAAAAJAAYAAAAGAAEAAAAJAAcAAAAGAAEAAAAEAAAAAAAAAAEAAAAEAP//AAAAAAAAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAFAP//AAAAAAEAAAAFAAAAAAABAAAAAAAGAAAAAAAAAAEAAAAGAP//AAAAAAEAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAEAAAAAAAEAAAAIAAEAAAAAAAEAAAAGAAUAAAAJAAAAAAAHAAUAAAAKAAAAAAAIAAUAAAALAAAAAAAKAAUAAAAGAAAAAAAKAAYAAAAGAAEAAAAKAAcAAAAGAAEAAAANAAUAAAAHAAEAAAANAAYAAAAGAAEAAAANAAcAAAAGAAEAAAAOAAUAAAAGAAAAAAAOAAYAAAAIAAEAAAAOAAcAAAAGAAEAAAALAAAAAAAAAAAAAAALAAEAAAAAAAEAAAAMAP//AAAAAAAAAAAMAAAAAAAAAAEAAAAMAAEAAAABAAEAAAANAP//AAAAAAAAAAANAAAAAAAAAAEAAAANAAEAAAAAAAEAAAAOAAAAAAAAAAAAAAAOAAEAAAAAAAEAAAAJAAAAAAAJAAAAAAAKAAAAAAALAAAAAAAPAAEAAAAEAAAAAAAQAAEAAAAEAAAAAAARAAEAAAAEAAAAAAASAAIAAAAFAAAAAAATAAMAAAAFAAEAAAAPAAIAAAAEAAEAAAAQAAIAAAAEAAEAAAARAAIAAAAEAAEAAAARAAMAAAAEAAEAAAASAAMAAAAEAAEAAAASAAQAAAAEAAEAAAATAAQAAAAEAAEAAAAAAAQAAAABAAAAAAAUAAMAAAAEAAAAAAAVAAMAAAAEAAAAAAAUAAQAAAAEAAEAAAAVAAQAAAAEAAEAAAAUAAUAAAAEAAEAAAAUAAYAAAAEAAEAAAAUAAcAAAAEAAEAAAAVAAcAAAAEAAEAAAAVAAYAAAAFAAAAAAAVAAUAAAAEAAEAAAAIAP//AAAAAAUAAAAIAP7/AAAAAAQAAAAIAP3/AAAAAAQAAAAIAPz/AAAAAAMAAAARAP7/AAAFAAMAAAARAP//AAAFAAQAAAARAAAAAAAFAAUAAAAQAAAAAAAIAAYAAAATAAIAAAAFAAgAAAD//wQAAAABAAYAAAAJAAQAAAAAAAgAAAAeAAQAAAABAAAAAAAeAAUAAAAAAAEAAAAeAAYAAAAAAAEAAAAeAAcAAAAAAAEAAAAfAAUAAAAAAAEAAAAfAAYAAAAAAAEAAAAfAAcAAAAAAAEAAAAeAAMAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAQAAAAAAAEAAAAgAAUAAAAAAAEAAAAgAAYAAAABAAEAAAAgAAcAAAAAAAEAAAAhAAUAAAAAAAEAAAAhAAYAAAAAAAEAAAAhAAcAAAAAAAEAAAAiAAMAAAADAAcAAAAiAAQAAAADAAgAAAAiAAEAAAACAAQAAAAiAAUAAAABAAAAAAAiAAYAAAAAAAEAAAAiAAcAAAAAAAEAAAAjAAcAAAAAAAEAAAAjAAYAAAAAAAEAAAAjAAUAAAAAAAEAAAAkAAUAAAAAAAEAAAAlAAUAAAAAAAEAAAAlAAYAAAAAAAEAAAAlAAcAAAAAAAEAAAAkAAcAAAAAAAEAAAAkAAYAAAAAAAEAAAAmAAUAAAAAAAEAAAAmAAYAAAAAAAEAAAAmAAcAAAAAAAEAAAAnAAQAAAABAAAAAAAoAAMAAAAAAAAAAAApAAMAAAAAAAAAAAAoAAQAAAAAAAEAAAAoAAUAAAAAAAEAAAAnAAUAAAAAAAEAAAAnAAYAAAAAAAEAAAAnAAcAAAAAAAEAAAAoAAcAAAAAAAEAAAAoAAYAAAAAAAEAAAApAAQAAAAAAAEAAAApAAUAAAAAAAEAAAApAAYAAAAAAAEAAAApAAcAAAAAAAEAAAArAAEAAAACAAAAAAAsAAAAAAADAAAAAAAsAP//AAACAAIAAAAtAP//AAACAAAAAAAtAAAAAAACAAEAAAArAAIAAAADAAEAAAAsAAEAAAACAAEAAAAtAAEAAAACAAEAAAAsAAIAAAACAAEAAAAuAP//AAAJAAEAAAAvAP//AAAKAAEAAAAwAP//AAAKAAEAAAAxAP//AAAKAAEAAAAyAP//AAALAAEAAAAzAP//AAACAAAAAAA0AP//AAACAAAAAAA0AAAAAAACAAEAAAAzAPz/AAAGAAMAAAAzAP3/AAAGAAQAAAAzAP7/AAAGAAUAAAArAAAAAAAGAAgAAAAzAAAAAAACAAEAAAA0AAEAAAADAAAAAAAqAPz/AAAEAAAAAAApAPz/AAAEAAAAAAApAP3/AAAFAAEAAAAqAP3/AAAEAAEAAAAnAPr/AAAEAAAAAAAmAPr/AAAEAAAAAAAoAPv/AAAFAAEAAAAoAPz/AAAEAAEAAAAnAPz/AAAEAAEAAAAnAPv/AAAEAAEAAAAmAPv/AAAEAAEAAAAmAPn/AAAEAAgAAAAlAPr/AAAEAAAAAAAkAPr/AAAEAAAAAAAkAPv/AAAFAAAAAAAlAPv/AAAEAAEAAAAmAPz/AAAEAAEAAAAoAP3/AAAEAAEAAAApAPn/AAAFAAMAAAApAPr/AAAFAAQAAAApAPv/AAAFAAUAAAAjAAQAAAABAAQAAAAlAAMAAAACAAgAAAAlAAQAAAADAAgAAAAlAAAAAAACAAQAAAAlAAIAAAADAAcAAAAjAPr/AAAEAAAAAAAiAPr/AAAEAAAAAAAhAPr/AAAEAAAAAAAgAPr/AAAEAAAAAAAfAPr/AAAEAAAAAAAfAPv/AAAFAAAAAAAgAPv/AAAEAAEAAAAhAPv/AAAEAAEAAAAiAPv/AAAEAAEAAAAjAPv/AAAFAAEAAAAfAPz/AAAEAAEAAAAeAPf/AAAFAAEAAAAeAPj/AAAEAAEAAAAeAPn/AAAEAAEAAAAeAPr/AAAEAAEAAAAeAPv/AAAEAAEAAAAeAPz/AAAEAAEAAAAdAPf/AAAEAAEAAAAdAPj/AAAEAAEAAAAdAPn/AAAEAAEAAAAdAPr/AAAFAAEAAAAdAPv/AAAEAAEAAAAgAPz/AAAEAAEAAAAeAPb/AAAFAAAAAAD+/wIAAAAJAAMAAAD+/wEAAAAJAAMAAAD+/wAAAAAJAAMAAAD///7/AAAJAAQAAAD///3/AAAJAAQAAAD///z/AAAJAAQAAAD///v/AAAJAAQAAAABAPv/AAAJAAMAAAACAPv/AAAJAAMAAAADAPv/AAAJAAMAAAD8////AAAJAAUAAAD9//7/AAAJAAYAAAD+/wYAAAACAAEAAAD9/wYAAAACAAEAAAD8/wYAAAACAAEAAAD7/wYAAAACAAEAAAD6/wYAAAACAAEAAAD5/wYAAAACAAEAAAD4/wYAAAACAAEAAAD4/wUAAAAAAAEAAAD3/wIAAAAAAAIAAAA=")
+tile_set = ExtResource("1_inive")
+
+[node name="SpieleManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_exuh1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SpieleManager"]
+
+[node name="ScoreLabel" type="Label" parent="SpieleManager/CanvasLayer"]
+offset_left = 39.0
+offset_top = 24.0
+offset_right = 174.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_inive")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+autowrap_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Spieler" parent="." instance=ExtResource("4_147mi")]
+position = Vector2(34, 37)
+
+[node name="Kamera" type="Camera2D" parent="Spieler"]
+position = Vector2(0, -7)
+zoom = Vector2(4, 4)
+limit_bottom = 120
+limit_smoothed = true
+position_smoothing_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Lavaboden" parent="." instance=ExtResource("5_l8kbu")]
+position = Vector2(74, 141)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lavaboden"]
+shape = SubResource("WorldBoundaryShape2D_cn5tm")
+metadata/_edit_lock_ = true
+
+[node name="Münzen" type="Node" parent="."]
+
+[node name="Münze" parent="Münzen" instance=ExtResource("6_trto6")]
+position = Vector2(73, 68)
+
+[node name="Münze2" parent="Münzen" instance=ExtResource("6_trto6")]
+position = Vector2(217, 69)
+
+[node name="Münze3" parent="Münzen" instance=ExtResource("6_trto6")]
+position = Vector2(232, 69)
+
+[node name="Münze4" parent="Münzen" instance=ExtResource("6_trto6")]
+position = Vector2(104, -44)
+
+[node name="Münze5" parent="Münzen" instance=ExtResource("6_trto6")]
+position = Vector2(503, 37)
+
+[node name="Münze6" parent="Münzen" instance=ExtResource("6_trto6")]
+position = Vector2(757, -25)
+
+[node name="Münze7" parent="Münzen" instance=ExtResource("6_trto6")]
+position = Vector2(776, -25)
+
+[node name="Münze8" parent="Münzen" instance=ExtResource("6_trto6")]
+position = Vector2(795, -25)
+
+[node name="Münze9" parent="Münzen" instance=ExtResource("6_trto6")]
+position = Vector2(584, -108)
+
+[node name="Plattformen" type="Node" parent="."]
+
+[node name="Plattform" parent="Plattformen" instance=ExtResource("7_68cdg")]
+position = Vector2(32, 9)
+
+[node name="Plattform2" parent="Plattformen" instance=ExtResource("7_68cdg")]
+position = Vector2(370, 52)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Plattformen/Plattform2"]
+libraries = {
+&"": SubResource("AnimationLibrary_xuk5v")
+}
+autoplay = "move"
+
+[node name="Plattform3" parent="Plattformen" instance=ExtResource("7_68cdg")]
+farbe = 3
+breite = 1
+
+[node name="Schleim" parent="." instance=ExtResource("8_dlty2")]
+position = Vector2(529, 81)
+
+[node name="Texte" type="Node" parent="."]
+
+[node name="Text" type="Label" parent="Texte"]
+offset_left = -119.0
+offset_top = 82.0
+offset_right = -23.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0.0117647, 0.14902, 0.34902, 1)
+theme_override_fonts/font = ExtResource("9_qgmpe")
+theme_override_font_sizes/font_size = 8
+text = "Space to jump."
+
+[node name="Text2" type="Label" parent="Texte"]
+offset_left = 368.0
+offset_top = 78.0
+offset_right = 464.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.0117647, 0.14902, 0.34902, 1)
+theme_override_fonts/font = ExtResource("9_qgmpe")
+theme_override_font_sizes/font_size = 8
+text = "Falling hurts..."
+
+[node name="Text3" type="Label" parent="Texte"]
+offset_left = 704.0
+offset_top = -48.0
+offset_right = 800.0
+offset_bottom = -30.0
+theme_override_colors/font_color = Color(0.0980392, 0.313726, 0.752941, 1)
+theme_override_fonts/font = ExtResource("9_qgmpe")
+theme_override_font_sizes/font_size = 8
+text = "Almost there..."
+
+[node name="Text4" type="Label" parent="Texte"]
+offset_left = 520.0
+offset_top = -163.0
+offset_right = 616.0
+offset_bottom = -145.0
+theme_override_colors/font_color = Color(0.0980392, 0.313726, 0.752941, 1)
+theme_override_fonts/font = ExtResource("9_qgmpe")
+theme_override_font_sizes/font_size = 8
+text = "Great job!"
+horizontal_alignment = 1
+
+[node name="BewegtePlattform" parent="." instance=ExtResource("9_rbvdy")]
+position = Vector2(99, -72)
+farbe = 3
+breite = 1
+
+[node name="Sprite2D" parent="BewegtePlattform" index="0"]
+region_rect = Rect2(0, 48, 16, 9)
+metadata/_edit_lock_ = false
+
+[node name="CollisionShape2D" parent="BewegtePlattform" index="1"]
+shape = SubResource("RectangleShape2D_rbvdy")
+metadata/_edit_lock_ = false
+
+[node name="Zielposition" parent="BewegtePlattform" index="2"]
+position = Vector2(-78, 58)
+metadata/_edit_lock_ = true
+
+[node name="Feuer" parent="." instance=ExtResource("6_147mi")]
+position = Vector2(58, 72)
+
+[node name="Ziel" parent="." instance=ExtResource("13_l8kbu")]
+position = Vector2(1, 33)
+
+[node name="Giftmüll" parent="." instance=ExtResource("14_xgq10")]
+position = Vector2(124, 74)
+
+[node name="Schleim2" parent="." instance=ExtResource("8_dlty2")]
+position = Vector2(-72, 97)
+
+[node name="Flaschen" type="Node" parent="."]
+
+[node name="Flasche" parent="Flaschen" instance=ExtResource("15_fbhlx")]
+position = Vector2(73, -23)
+
+[node name="Flasche2" parent="Flaschen" instance=ExtResource("15_fbhlx")]
+position = Vector2(88, -44)
+farbe = 1
+
+[node name="Flasche3" parent="Flaschen" instance=ExtResource("15_fbhlx")]
+position = Vector2(139, -8)
+farbe = 2
+
+[node name="Flasche4" parent="Flaschen" instance=ExtResource("15_fbhlx")]
+position = Vector2(204, -25)
+farbe = 3
+
+[editable path="BewegtePlattform"]

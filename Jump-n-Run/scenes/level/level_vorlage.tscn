@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=4 uid="uid://curqgjcvgdfrg"]
+
+[ext_resource type="PackedScene" uid="uid://3djkvn8gsn8d" path="res://scenes/hintergrund.tscn" id="1_sr5oq"]
+[ext_resource type="TileSet" uid="uid://d2rvhvcwtaetl" path="res://scenes/tileset.tres" id="2_jx15w"]
+[ext_resource type="PackedScene" uid="uid://se3yf2bpd7k7" path="res://scenes/spiele_manager.tscn" id="3_abihs"]
+[ext_resource type="PackedScene" uid="uid://dqnaqj8yb6hwd" path="res://scenes/spieler.tscn" id="5_w2j4b"]
+[ext_resource type="PackedScene" uid="uid://dtrbka1ef726o" path="res://scenes/killzone.tscn" id="6_4bmo0"]
+[ext_resource type="PackedScene" uid="uid://oeleuyu0x67e" path="res://scenes/gegenstände/ziel.tscn" id="6_p8u22"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cn5tm"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Hintergrund" parent="." instance=ExtResource("1_sr5oq")]
+metadata/_edit_lock_ = true
+
+[node name="Szene" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAA=")
+tile_set = ExtResource("2_jx15w")
+
+[node name="SpieleManager" parent="." instance=ExtResource("3_abihs")]
+unique_name_in_owner = true
+
+[node name="Spieler" parent="." instance=ExtResource("5_w2j4b")]
+position = Vector2(34, 37)
+
+[node name="Kamera" type="Camera2D" parent="Spieler"]
+position = Vector2(0, -7)
+zoom = Vector2(4, 4)
+limit_bottom = 120
+limit_smoothed = true
+position_smoothing_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Lavaboden" parent="." instance=ExtResource("6_4bmo0")]
+position = Vector2(74, 141)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lavaboden"]
+shape = SubResource("WorldBoundaryShape2D_cn5tm")
+
+[node name="Münzen" type="Node" parent="."]
+
+[node name="Plattformen" type="Node" parent="."]
+
+[node name="Texte" type="Node" parent="."]
+
+[node name="Ziel" parent="." instance=ExtResource("6_p8u22")]
+position = Vector2(122, 20)

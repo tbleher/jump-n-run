@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=4 uid="uid://bk2teavmaecc7"]
+
+[ext_resource type="PackedScene" uid="uid://3djkvn8gsn8d" path="res://scenes/hintergrund.tscn" id="1_itini"]
+[ext_resource type="TileSet" uid="uid://d2rvhvcwtaetl" path="res://scenes/tileset.tres" id="2_fdjjt"]
+[ext_resource type="PackedScene" uid="uid://se3yf2bpd7k7" path="res://scenes/spiele_manager.tscn" id="3_oym5d"]
+[ext_resource type="PackedScene" uid="uid://dqnaqj8yb6hwd" path="res://scenes/spieler.tscn" id="4_cuis6"]
+[ext_resource type="PackedScene" uid="uid://dtrbka1ef726o" path="res://scenes/killzone.tscn" id="5_0gbsy"]
+[ext_resource type="PackedScene" uid="uid://oeleuyu0x67e" path="res://scenes/gegenstände/ziel.tscn" id="6_s7iqi"]
+[ext_resource type="PackedScene" uid="uid://despq3lmat6a4" path="res://scenes/gegenstände/feuer.tscn" id="7_oym5d"]
+[ext_resource type="PackedScene" uid="uid://d2w2i5h0lhc6l" path="res://scenes/gegenstände/schleim.tscn" id="8_cuis6"]
+[ext_resource type="PackedScene" uid="uid://pqp5qaw561fr" path="res://scenes/gegenstände/münze.tscn" id="9_cuis6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cn5tm"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Hintergrund" parent="." instance=ExtResource("1_itini")]
+metadata/_edit_lock_ = true
+
+[node name="SpieleManager" parent="." instance=ExtResource("3_oym5d")]
+unique_name_in_owner = true
+
+[node name="Spieler" parent="." instance=ExtResource("4_cuis6")]
+position = Vector2(-103, 42)
+
+[node name="Kamera" type="Camera2D" parent="Spieler"]
+position = Vector2(0, -7)
+zoom = Vector2(4, 4)
+limit_bottom = 120
+limit_smoothed = true
+position_smoothing_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Lavaboden" parent="." instance=ExtResource("5_0gbsy")]
+position = Vector2(74, 141)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lavaboden"]
+shape = SubResource("WorldBoundaryShape2D_cn5tm")
+
+[node name="Szene" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAABAAQAAAAIAAEAAAADAAEAAAAFAAMAAAADAAIAAAAFAAQAAAADAAMAAAAFAAUAAAD5/wQAAAAIAAEAAAD7/wMAAAAIAAEAAAD9/wIAAAAIAAEAAAD//wMAAAAIAAEAAAAIAAQAAAAJAAAAAAAJAAQAAAAKAAAAAAAKAAQAAAALAAAAAAALAAQAAAAJAAAAAAAMAAQAAAAKAAAAAAANAAQAAAALAAAAAAADAAQAAAAGAAEAAAAOAAQAAAAIAAAAAAAHAP//AAAAAAgAAAAHAAQAAAAIAAAAAAAFAAUAAAAIAAAAAAARAAMAAAAIAAAAAAASAAUAAAAIAAAAAAAUAAUAAAAIAAAAAAAdAAUAAAAIAAEAAAAVAAYAAAAIAAEAAAAYAAYAAAAIAAAAAAAbAAYAAAAIAAEAAAAXAAUAAAAJAAoAAAAQAAMAAAADAAkAAAAQAAQAAAAJAAAAAAAQAAEAAAADAAkAAAAQAAIAAAADAAoAAAAQAP//AAADAAkAAAAQAAAAAAADAAoAAAAQAAUAAAADAAkAAAAQAAYAAAADAAoAAAAPAAQAAAADAAkAAAAPAAUAAAADAAoAAAAPAAIAAAAMAAUAAAAPAAMAAAADAAoAAAAPAAAAAAADAAkAAAAPAAEAAAADAAoAAAASAAIAAAAMAAUAAAATAAMAAAAMAAYAAAAVAAQAAAAMAAUAAAAYAAQAAAAMAAUAAAAbAAQAAAAMAAUAAAAdAAMAAAAMAAUAAAAfAAMAAAAJAAMAAAAfAAQAAAAJAAMAAAAfAAEAAAAJAAMAAAAfAP//AAAJAAMAAAAdAAQAAAAHAAcAAAAbAAUAAAAHAAgAAAAYAAUAAAAIAAgAAAAUAAQAAAAIAAgAAAAhAAAAAAAIAAEAAAAmAAEAAAACAAQAAAAmAAIAAAAHAAQAAAAoAAMAAAAHAAQAAAAqAAIAAAAHAAQAAAAjAAEAAAAIAAAAAAAxAAQAAAAIAAAAAAA0AAMAAAAIAAAAAAAtAAQAAAAIAAAAAAA3AAQAAAAIAAAAAAA6AAMAAAAIAAAAAAA9AAIAAAAIAAAAAAA4AAAAAAAIAAAAAAA5AP//AAAIAAAAAAA6AP7/AAAIAAAAAAA7AP3/AAAIAAAAAAA/AAEAAAAIAAEAAABBAP7/AAAIAAAAAAA/AP3/AAAIAAAAAAA9AP7/AAAIAAAAAAA2AP//AAAIAAAAAAA0AP7/AAAIAAAAAAAyAP3/AAAIAAAAAAAuAPz/AAAIAAAAAAAuAP3/AAAIAAEAAAAsAPv/AAAIAAAAAAAsAPz/AAAIAAEAAAAqAPr/AAAIAAAAAAAqAPv/AAAIAAEAAAAnAPn/AAAIAAAAAAAnAPr/AAAIAAEAAAAlAPj/AAAIAAAAAAAlAPn/AAAIAAEAAAAjAPb/AAAIAAAAAAAjAPf/AAAIAAEAAAAmAPb/AAAGAAAAAAApAPb/AAAGAAAAAAAsAPf/AAAGAAAAAAApAPf/AAAGAAEAAAAsAPj/AAAGAAEAAAAvAPj/AAAGAAAAAAAvAPn/AAAGAAEAAAAzAPf/AAAGAAAAAAAzAPj/AAAGAAEAAAA2APb/AAAGAAAAAAA2APf/AAAGAAEAAAA4APj/AAAGAAAAAAA4APn/AAAGAAEAAAA8APf/AAAGAAAAAAA8APj/AAAGAAEAAAA=")
+tile_set = ExtResource("2_fdjjt")
+
+[node name="Münzen" type="Node" parent="."]
+
+[node name="Plattformen" type="Node" parent="."]
+
+[node name="Texte" type="Node" parent="."]
+
+[node name="Ziel" parent="." instance=ExtResource("6_s7iqi")]
+position = Vector2(1344, 162)
+
+[node name="Feuer" parent="." instance=ExtResource("7_oym5d")]
+position = Vector2(297, 70)
+
+[node name="Münze" parent="." instance=ExtResource("9_cuis6")]
+position = Vector2(277, 37)
+
+[node name="Münze2" parent="." instance=ExtResource("9_cuis6")]
+position = Vector2(535, -4)
+
+[node name="Schleim" parent="Münze2" instance=ExtResource("8_cuis6")]
+position = Vector2(-158, 100)
+
+[node name="Schleim2" parent="Münze2" instance=ExtResource("8_cuis6")]
+position = Vector2(147, 66)
+
+[node name="Münze3" parent="." instance=ExtResource("9_cuis6")]
+position = Vector2(503, 14)
+
+[node name="Münze4" parent="." instance=ExtResource("9_cuis6")]
+position = Vector2(808, -57)
+
+[node name="Münze5" parent="." instance=ExtResource("9_cuis6")]
+position = Vector2(872, -25)
+
+[node name="Münze6" parent="." instance=ExtResource("9_cuis6")]
+position = Vector2(906, -9)
+
+[node name="Ziel2" parent="." instance=ExtResource("6_s7iqi")]
+position = Vector2(1054, -117)
+
+[node name="Schleim" parent="." instance=ExtResource("8_cuis6")]
+position = Vector2(921, -16)
+
+[node name="Schleim2" parent="." instance=ExtResource("8_cuis6")]
+position = Vector2(972, 47)

@@ -54,7 +54,7 @@ shape = SubResource("WorldBoundaryShape2D_cn5tm")
 [node name="Texte" type="Node" parent="."]
 
 [node name="Ziel" parent="." instance=ExtResource("6_a0pxo")]
-position = Vector2(-298, -6)
+position = Vector2(-298, -7)
 
 [node name="Flasche" parent="." instance=ExtResource("7_xegos")]
 position = Vector2(-105, 57)
@@ -134,8 +134,15 @@ position = Vector2(-166, 42)
 [node name="BewegtePlattform" parent="." instance=ExtResource("13_nlkt8")]
 position = Vector2(-294, 33)
 
+[node name="Sprite2D" parent="BewegtePlattform" index="0"]
+metadata/_edit_lock_ = false
+
+[node name="CollisionShape2D" parent="BewegtePlattform" index="1"]
+metadata/_edit_lock_ = false
+
 [node name="Zielposition" parent="BewegtePlattform" index="2"]
 position = Vector2(394, 0)
+metadata/_edit_lock_ = true
 
 [node name="Giftmüll5" parent="." instance=ExtResource("9_b84yh")]
 position = Vector2(-225, 23)

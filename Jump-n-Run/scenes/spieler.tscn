@@ -382,22 +382,25 @@ collision_layer = 2
 script = ExtResource("1_ofpvf")
 
 [node name="AnimatedSprite2DPrinzessin" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(-1, -16)
 sprite_frames = SubResource("SpriteFrames_giikn")
 animation = &"idle"
 
 [node name="AnimatedSprite2DRitter" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_81gkq")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.6646433
 
 [node name="AnimatedSprite2DBusch" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_xrwdu")
 animation = &"run"
 autoplay = "idle"
-frame_progress = 0.6391306
+frame_progress = 0.49794045
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)

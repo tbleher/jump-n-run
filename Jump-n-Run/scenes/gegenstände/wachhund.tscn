@@ -1,0 +1,172 @@
+[gd_scene load_steps=21 format=3 uid="uid://vu331s6npnpm"]
+
+[ext_resource type="Script" uid="uid://dyglbvbw0kip1" path="res://scripts/wachhund.gd" id="1_evvv4"]
+[ext_resource type="Texture2D" uid="uid://dhrb48b35lr4t" path="res://assets/sprites/wolfsheet2.png" id="2_yscw2"]
+[ext_resource type="PackedScene" uid="uid://dtrbka1ef726o" path="res://scenes/killzone.tscn" id="3_yscw2"]
+[ext_resource type="AudioStream" uid="uid://6lccmman8f08" path="res://assets/sounds/Hund-aggressives_Bellen_eines_Schäferhundes,_Polizeihund.mp3" id="4_sc8jg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc8jg"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(64, 288, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqk5p"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(128, 288, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1ag6"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(192, 288, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d02a8"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(256, 288, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1udn5"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(64, 96, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbcs7"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(128, 96, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_il7jb"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(192, 96, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wggir"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(256, 96, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ficm5"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(192, 320, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k40d3"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(256, 320, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfhdu"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(192, 128, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmxnk"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(256, 128, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1pgs"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(0, 288, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i2d8"]
+atlas = ExtResource("2_yscw2")
+region = Rect2(0, 96, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u00qs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc8jg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqk5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1ag6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d02a8")
+}],
+"loop": true,
+"name": &"gehen_links",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1udn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbcs7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il7jb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wggir")
+}],
+"loop": true,
+"name": &"gehen_rechts",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ficm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k40d3")
+}],
+"loop": true,
+"name": &"rennen_links",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfhdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmxnk")
+}],
+"loop": true,
+"name": &"rennen_rechts",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1pgs")
+}],
+"loop": true,
+"name": &"stehen_links",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0i2d8")
+}],
+"loop": true,
+"name": &"stehen_rechts",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sc8jg"]
+size = Vector2(57, 20)
+
+[node name="Wachhund" type="Node2D" groups=["killable_enemy"]]
+script = ExtResource("1_evvv4")
+geschwindigkeit = 100.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_u00qs")
+animation = &"gehen_links"
+autoplay = "stehen_rechts"
+
+[node name="RayCast2DLinksUnten" type="RayCast2D" parent="."]
+position = Vector2(-24, 16)
+target_position = Vector2(0, 12)
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2DRechtsUnten" type="RayCast2D" parent="."]
+position = Vector2(22, 15)
+target_position = Vector2(0, 10)
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="Killzone" parent="." instance=ExtResource("3_yscw2")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_sc8jg")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_sc8jg")
+autoplay = true
+max_distance = 262.0

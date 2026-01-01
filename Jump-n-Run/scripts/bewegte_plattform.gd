@@ -8,7 +8,7 @@ var target_offset := Vector2(100, 0)
 
 var target: Marker2D
 
-enum Farbe {GRÜN, BRAUN, GELB, BLAU}
+enum Farbe {GRÜN, BRAUN, GELB, BLAU, GRAU}
 ## Farbe der Plattform
 @export var farbe : Farbe = Farbe.GRÜN:
 	set(value):
@@ -57,7 +57,9 @@ func update_farbe() -> void:
 			sprite.region_rect.position.y = 32
 		Farbe.BLAU:
 			sprite.region_rect.position.y = 48
-
+		Farbe.GRAU:
+			sprite.region_rect.position.y = 64
+			
 func update_breite() -> void:
 	var sprite := get_node_or_null("Sprite2D")
 	if sprite == null:

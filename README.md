@@ -15,6 +15,10 @@ Zusätzlich werden Icons von
 https://www.softicons.com/toolbar-icons/16x16-free-application-icons-by-aha-soft
 verwendet. Diese sind unter CC BY-SA-3.
 
+https://opengameart.org/content/lpc-wolf-animation wird unter CC-BY 4.0 verwendet.
+
+Der Hunde-Sound ist von https://hoerspielbox.de
+
 Der Fokus im Godot-Setup ist, dass Kinder leicht neue Level erstellen können.
 
 Work in Progress (kein fertiges Spiel).
